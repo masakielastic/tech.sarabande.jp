@@ -1,0 +1,49 @@
+---
+import BaseLayout from "./BaseLayout.astro";
+
+interface Props {
+	frontmatter: {
+		title: string;
+		description: string;
+		pubDate: Date;
+		tags?: string[];
+	};
+}
+
+const { frontmatter } = Astro.props;
+const publishedAt = new Date(frontmatter.pubDate);
+const formattedDate = new Intl.DateTimeFormat("ja-JP", {
+	year: "numeric",
+	month: "long",
+	day: "numeric",
+}).format(publishedAt);
+---
+
+<BaseLayout
+	title={frontmatter.title}
+	description={frontmatter.description}
+	type="article"
+>
+	<article>
+		<header class="post-header">
+			<div class="post-meta">
+				<time datetime={publishedAt.toISOString()}>{formattedDate}</time>
+			</div>
+			<h1>{frontmatter.title}</h1>
+			<p class="post-description">{frontmatter.description}</p>
+			{
+				frontmatter.tags?.length ? (
+					<div class="tags" aria-label="タグ">
+						{frontmatter.tags.map((tag) => (
+							<span class="tag">{tag}</span>
+						))}
+					</div>
+				) : null
+			}
+		</header>
+		<div class="post-content">
+			<slot />
+		</div>
+		<a class="back-link" href="/">記事一覧へ戻る</a>
+	</article>
+</BaseLayout>

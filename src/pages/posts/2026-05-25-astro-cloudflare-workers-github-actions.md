@@ -1,4 +1,5 @@
 ---
+layout: ../../layouts/PostLayout.astro
 title: "Astro と Cloudflare Workers でテックブログを作り、GitHub Actions で自動デプロイするまで"
 description: "Astro の最小構成から Cloudflare Workers にデプロイし、custom_domain: true で独自ドメインを割り当て、GitHub Actions で自動デプロイするまでの学習記録。"
 pubDate: 2026-05-25

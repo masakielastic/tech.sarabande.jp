@@ -1,17 +1,62 @@
 ---
+import BaseLayout from "../layouts/BaseLayout.astro";
 
+type PostModule = {
+	frontmatter: {
+		title: string;
+		description: string;
+		pubDate: Date | string;
+		tags?: string[];
+	};
+	url: string;
+};
+
+const posts = Object.values(
+	import.meta.glob<PostModule>("./posts/*.md", { eager: true }),
+).sort(
+	(a, b) =>
+		new Date(b.frontmatter.pubDate).getTime() -
+		new Date(a.frontmatter.pubDate).getTime(),
+);
+
+const formatDate = (date: Date | string) =>
+	new Intl.DateTimeFormat("ja-JP", {
+		year: "numeric",
+		month: "long",
+		day: "numeric",
+	}).format(new Date(date));
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<BaseLayout description="Astro と Cloudflare Workers で運用する技術メモ。">
+	<section class="hero">
+		<h1>tech.sarabande.jp</h1>
+		<p>Astro、Cloudflare、Web 技術まわりの学習記録と実装メモ。</p>
+	</section>
+
+	<ul class="post-list">
+		{
+			posts.map((post) => (
+				<li class="post-card">
+					<article>
+						<div class="post-meta">
+							<time datetime={new Date(post.frontmatter.pubDate).toISOString()}>
+								{formatDate(post.frontmatter.pubDate)}
+							</time>
+						</div>
+						<h2>
+							<a href={post.url}>{post.frontmatter.title}</a>
+						</h2>
+						<p>{post.frontmatter.description}</p>
+						{post.frontmatter.tags?.length ? (
+							<div class="tags" aria-label="タグ">
+								{post.frontmatter.tags.map((tag: string) => (
+									<span class="tag">{tag}</span>
+								))}
+							</div>
+						) : null}
+					</article>
+				</li>
+			))
+		}
+	</ul>
+</BaseLayout>

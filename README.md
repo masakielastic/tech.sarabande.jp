@@ -1,43 +1,62 @@
-# Astro Starter Kit: Minimal
+# tech.sarabande.jp
+
+Astro と Cloudflare Workers で運用する個人用テックブログです。
+
+## 構成
+
+- `src/pages/index.astro`: 記事一覧
+- `src/pages/posts/*.md`: 記事本文
+- `src/layouts/BaseLayout.astro`: 共通 HTML、メタ情報、スタイル
+- `src/layouts/PostLayout.astro`: 記事ページ用レイアウト
+- `src/pages/404.astro`: 404 ページ
+- `public/`: favicon や robots.txt などの静的ファイル
+- `wrangler.jsonc`: Cloudflare Workers Assets のデプロイ設定
+
+## 開発
 
 ```sh
-npm create astro@latest -- --template minimal
+npm install
+npm run dev
 ```
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+ローカル開発サーバーは通常 `http://localhost:4321` で起動します。
 
-## 🚀 Project Structure
+## ビルド
 
-Inside of your Astro project, you'll see the following folders and files:
-
-```text
-/
-├── public/
-├── src/
-│   └── pages/
-│       └── index.astro
-└── package.json
+```sh
+npm run build
 ```
 
-Astro looks for `.astro` or `.md` files in the `src/pages/` directory. Each page is exposed as a route based on its file name.
+Astro が静的ファイルを `dist/` に生成します。Cloudflare Workers にはこの `dist/` を Workers Assets としてデプロイします。
 
-There's nothing special about `src/components/`, but that's where we like to put any Astro/React/Vue/Svelte/Preact components.
+## デプロイ
 
-Any static assets, like images, can be placed in the `public/` directory.
+```sh
+npm run deploy
+```
 
-## 🧞 Commands
+このコマンドは `astro build` のあとに `wrangler deploy` を実行します。
 
-All commands are run from the root of the project, from a terminal:
+GitHub Actions では `main` ブランチへの push をきっかけにビルドとデプロイを実行します。GitHub Environment `Cloudflare` に次の secrets が必要です。
 
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+- `CLOUDFLARE_API_TOKEN`
+- `CLOUDFLARE_ACCOUNT_ID`
 
-## 👀 Want to learn more?
+## 記事の追加
 
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+`src/pages/posts/` に Markdown ファイルを追加します。
+
+```md
+---
+layout: ../../layouts/PostLayout.astro
+title: "記事タイトル"
+description: "記事の説明文"
+pubDate: 2026-05-25
+tags:
+  - Astro
+---
+
+本文を書きます。
+```
+
+ファイル名が URL になります。たとえば `src/pages/posts/example.md` は `/posts/example/` として公開されます。
