@@ -1,7 +1,7 @@
 ---
 
 layout: ../../layouts/PostLayout.astro
-title: "10年ぶりに WordPress を Debian に入れて、WP-CLI・wp server・nghttpx で HTTPS ローカル環境を作った"
+title: "久しぶりに WordPress を Debian に入れて、WP-CLI・wp server・nghttpx で HTTPS ローカル環境を作った"
 description: "Debian 上で WordPress を最小構成で検証するために、WP-CLI、MariaDB、wp server、nghttpx による TLS 終端を試した学習ログです。"
 pubDate: 2026-05-25
 tags:
@@ -15,7 +15,7 @@ tags:
 
 ## はじめに
 
-10年以上ぶりに、Debian 上で WordPress をインストールしてみました。
+久しぶりに、Debian 上で WordPress をインストールしてみました。
 
 昔の WordPress は、Apache、PHP、MySQL、`style.css`、PHP テンプレート、クラシックテーマという印象が強かったのですが、現在の WordPress はかなり変わっていました。
 
@@ -399,9 +399,9 @@ theme.json
 
 この変化を知らずに見ると、シンプルすぎて CSS が効いていないように見えてしまいます。
 
-## 10年前の WordPress との違い
+## 久しぶりの WordPress との違い
 
-最後に WordPress を本格的に触ったのは10年以上前だったので、いろいろな部分が変わっていました。
+最後に WordPress を本格的に触ったのはかなり前だったので、いろいろな部分が変わっていました。
 
 昔の感覚では、WordPress のテーマといえば次のようなものでした。
 
@@ -468,4 +468,4 @@ Cloudflare Tunnel / Access との組み合わせ
 
 今回は、WordPress のインストールそのものよりも、現在の WordPress の入口を確認する作業になりました。
 
-10年以上前の感覚で見ると戸惑う部分もありましたが、WP-CLI と `wp server` を使えば、ローカルでの再入門はかなり楽に始められそうです。
+久しぶりの感覚で見ると戸惑う部分もありましたが、WP-CLI と `wp server` を使えば、ローカルでの再入門はかなり楽に始められそうです。
