@@ -5,14 +5,12 @@ title: "10年ぶりに WordPress を Debian に入れて、WP-CLI・wp server・
 description: "Debian 上で WordPress を最小構成で検証するために、WP-CLI、MariaDB、wp server、nghttpx による TLS 終端を試した学習ログです。"
 pubDate: 2026-05-25
 tags:
-
-* WordPress
-* Debian
-* WP-CLI
-* MariaDB
-* nghttpx
-* HTTPS
-
+  - WordPress
+  - Debian
+  - WP-CLI
+  - MariaDB
+  - nghttpx
+  - HTTPS
 ---
 
 ## はじめに
