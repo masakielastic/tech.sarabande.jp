@@ -10,6 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     timeout-minutes: 10
 
+    environment: Cloudflare
+
     permissions:
       contents: read
 
@@ -33,12 +35,17 @@ jobs:
       - name: Build Astro
         run: npm run build
 
-      - name: Check files
+      - name: Check build output
         run: |
           pwd
           ls -la
           ls -la dist
           npx wrangler --version
+
+      - name: Check Cloudflare env
+        run: |
+          test -n "$CLOUDFLARE_API_TOKEN" && echo "CLOUDFLARE_API_TOKEN is set"
+          test -n "$CLOUDFLARE_ACCOUNT_ID" && echo "CLOUDFLARE_ACCOUNT_ID is set"
 
       - name: Deploy to Cloudflare Workers
         run: npx wrangler deploy
