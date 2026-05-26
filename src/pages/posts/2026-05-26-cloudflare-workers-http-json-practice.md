@@ -5,13 +5,12 @@ title: "Cloudflare Workers で HTTP リクエスト処理を練習する：cURL 
 description: "Cloudflare Workers で JSON を返す小さな API を作り、cURL で GET・POST・ヘッダー・ボディ・ステータスコードを確認しながら、最後に JavaScript の fetch に置き換える練習記録。"
 pubDate: 2026-05-26
 tags:
-
-* Cloudflare Workers
-* Wrangler
-* HTTP
-* cURL
-* JavaScript
-* JSON API
+  - Cloudflare Workers
+  - Wrangler
+  - HTTP
+  - cURL
+  - JavaScript
+  - JSON API
 
 ---
 
